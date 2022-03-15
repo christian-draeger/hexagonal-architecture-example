@@ -1,7 +1,5 @@
 package domain
 
-import CartItem
-import Price
 import aValidCartItem
 import aValidProduct
 import aValidSKU_10chars
@@ -13,9 +11,6 @@ import strikt.assertions.hasSize
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 import strikt.assertions.isFailure
-import toName
-import toPrice
-import toSKU
 
 internal class CartItemTest {
     @Test
@@ -80,7 +75,7 @@ internal class CartItemTest {
         val item = aValidCartItem(
             product = aValidProduct(
                 sku = sku,
-                name = "Product A".toName(),
+                name = "domain.Product A".toName(),
                 price = 3333.toPrice()
             ),
             quantity = 2
@@ -89,7 +84,7 @@ internal class CartItemTest {
         val itemToMerge = aValidCartItem(
             product = aValidProduct(
                 sku = sku,
-                name = "Product B".toName(),
+                name = "domain.Product B".toName(),
                 price = 5555.toPrice()
             ),
             quantity = 2

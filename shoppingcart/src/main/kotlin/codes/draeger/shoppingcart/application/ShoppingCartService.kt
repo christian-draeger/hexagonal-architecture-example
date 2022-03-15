@@ -1,7 +1,7 @@
 package codes.draeger.shoppingcart.application
 
-import Cart
-import SKU
+import domain.Cart
+import domain.SKU
 import java.util.UUID
 
 interface ShoppingCartService {

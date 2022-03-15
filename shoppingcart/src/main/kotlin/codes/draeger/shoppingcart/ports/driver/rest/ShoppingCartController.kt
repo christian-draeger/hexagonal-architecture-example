@@ -1,6 +1,6 @@
 package codes.draeger.shoppingcart.ports.driver.rest
 
-import Cart
+import domain.Cart
 import codes.draeger.shoppingcart.application.ShoppingCartService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

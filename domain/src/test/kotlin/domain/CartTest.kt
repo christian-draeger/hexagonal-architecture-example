@@ -1,7 +1,5 @@
 package domain
 
-import Name
-import SKU
 import aValidCart
 import aValidCartItem
 import aValidProduct
@@ -10,7 +8,6 @@ import anEmptyCart
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.containsExactly
-import toPrice
 
 internal class CartTest {
 

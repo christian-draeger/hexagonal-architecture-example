@@ -1,3 +1,5 @@
+package domain
+
 import kotlin.random.Random
 
 // composed Objects are only using domain objects
@@ -12,7 +14,7 @@ data class Product(
 value class SKU(val value: String) {
     // domain models are validating themselves
     init {
-        require(isValid) { "invalid SKU '$value' given" }
+        require(isValid) { "invalid domain.SKU '$value' given" }
     }
 
     companion object {
@@ -25,7 +27,7 @@ value class SKU(val value: String) {
         }
     }
 
-    // let's assume a valid SKU is alphanumeric and has a length between 8 and 12 uppercase characters, e.g.: 1234AB567X
+    // let's assume a valid domain.SKU is alphanumeric and has a length between 8 and 12 uppercase characters, e.g.: 1234AB567X
     val isValid get() = "(\\d|[A-Z]){8,12}".toRegex().matches(value)
 
     override fun toString() = value

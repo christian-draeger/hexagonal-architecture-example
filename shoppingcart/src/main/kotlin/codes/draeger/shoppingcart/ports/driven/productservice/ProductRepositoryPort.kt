@@ -1,7 +1,7 @@
 package codes.draeger.shoppingcart.ports.driven.productservice
 
-import Product
-import SKU
+import domain.Product
+import domain.SKU
 import org.springframework.stereotype.Service
 
 @Service

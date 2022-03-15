@@ -1,3 +1,5 @@
+package domain
+
 import java.util.UUID
 
 data class Cart(
@@ -36,14 +38,14 @@ data class Cart(
     private fun validateMaxPrice() {
         val maxTotalPriceInCents = 1000_00
         require(totalPriceInCents <= maxTotalPriceInCents) {
-            "Cart '$id' exceeded the maximum total price of $maxTotalPriceInCents with a value of $totalPrice"
+            "domain.Cart '$id' exceeded the maximum total price of $maxTotalPriceInCents with a value of $totalPrice"
         }
     }
 
     private fun validateMaxItemCount() {
         val maxItemsAmount = 100
         require(totalQuantity <= maxItemsAmount) {
-            "Cart '$id' exceeded the maximum amount of $maxItemsAmount items with a value of $totalQuantity"
+            "domain.Cart '$id' exceeded the maximum amount of $maxItemsAmount items with a value of $totalQuantity"
         }
     }
 }

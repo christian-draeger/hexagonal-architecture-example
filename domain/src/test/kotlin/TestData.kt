@@ -1,3 +1,9 @@
+import domain.Cart
+import domain.CartItem
+import domain.Name
+import domain.Price
+import domain.Product
+import domain.SKU
 import java.util.UUID
 
 const val aValidSKU_10chars = "1234AB567X"
@@ -7,7 +13,7 @@ const val aValidSKU_12chars = "12345ABC567X"
 fun aValidProduct(
     sku: SKU = SKU.randomSKU(),
     price: Price = Price(4711),
-    name: Name = Name("A test Product"),
+    name: Name = Name("A test domain.Product"),
 ) = Product(
     sku = sku,
     price = price,
