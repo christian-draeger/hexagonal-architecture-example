@@ -12,7 +12,7 @@ data class Cart(
     private val totalPriceInCents = items.sumOf { it.price.inCents }
 
     val totalPrice = totalPriceInCents.toPrice()
-    val totalItemCount = items.sumOf { it.quantity }
+    val totalQuantity = items.sumOf { it.quantity }
 
     fun addItem(item: CartItem): Cart {
         val mergedItem = if (item in this) item.merge(getItemBySku(item.product.sku)) else item
@@ -42,8 +42,8 @@ data class Cart(
 
     private fun validateMaxItemCount() {
         val maxItemsAmount = 100
-        require(totalItemCount <= maxItemsAmount) {
-            "Cart '$id' exceeded the maximum amount of $maxItemsAmount items with a value of $totalItemCount"
+        require(totalQuantity <= maxItemsAmount) {
+            "Cart '$id' exceeded the maximum amount of $maxItemsAmount items with a value of $totalQuantity"
         }
     }
 }
