@@ -1,4 +1,4 @@
-package codes.draeger.application
+package codes.draeger.shoppingcart
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
