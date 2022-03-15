@@ -1,3 +1,10 @@
+package domain
+
+import CartItem
+import Price
+import aValidCartItem
+import aValidProduct
+import aValidSKU_10chars
 import org.junit.jupiter.api.Test
 import strikt.api.expectCatching
 import strikt.api.expectThat
@@ -6,6 +13,9 @@ import strikt.assertions.hasSize
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 import strikt.assertions.isFailure
+import toName
+import toPrice
+import toSKU
 
 internal class CartItemTest {
     @Test
@@ -55,10 +65,12 @@ internal class CartItemTest {
             product = aValidProduct(price = Price(inCents = 3333)),
             quantity = 5
         )
-        expectThat(item.price).isEqualTo(Price(
-            inCents = 16665,
-            currency = Price.Currency.EUR
-        ))
+        expectThat(item.price).isEqualTo(
+            Price(
+                inCents = 16665,
+                currency = Price.Currency.EUR
+            )
+        )
     }
 
     @Test

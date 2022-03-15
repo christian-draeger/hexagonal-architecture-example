@@ -1,3 +1,9 @@
+package domain
+
+import SKU
+import aValidSKU_10chars
+import aValidSKU_12chars
+import aValidSKU_8chars
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource

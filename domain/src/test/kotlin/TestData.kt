@@ -12,7 +12,7 @@ fun aValidProduct(
     sku = sku,
     price = price,
     name = name,
-    )
+)
 
 fun aValidCartItem(
     product: Product = aValidProduct(),
