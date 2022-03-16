@@ -21,5 +21,6 @@ pluginManagement {
 
 include(
     "domain",
-    "shoppingcart",
+    "infrastructure",
+    "application",
 )
