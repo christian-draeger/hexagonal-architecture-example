@@ -1,7 +1,7 @@
 package codes.draeger.config
 
-import codes.draeger.adapter.DomainShoppingCartService
-import codes.draeger.persistence.MongoDbShoppingCartRepository
+import codes.draeger.service.ShoppingCartServicePort
+import codes.draeger.persistence.ShoppingCartRepositoryAdapter
 import codes.draeger.port.ShoppingCartService
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.info.BuildProperties
@@ -12,7 +12,7 @@ import java.util.Properties
 
 @Configuration
 class AppConfig(
-    private val mongoDbShoppingCartRepository: MongoDbShoppingCartRepository
+    private val shoppingCartRepositoryAdapter: ShoppingCartRepositoryAdapter
 ) {
 
     @Bean
@@ -23,7 +23,7 @@ class AppConfig(
 
     @Bean
     fun shoppingCartService(): ShoppingCartService {
-        return DomainShoppingCartService(mongoDbShoppingCartRepository)
+        return ShoppingCartServicePort(shoppingCartRepositoryAdapter)
     }
 
 }

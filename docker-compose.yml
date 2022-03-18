@@ -3,20 +3,18 @@ version: "3.8"
 services:
   database:
     image: mongo:5.0.6
-    container_name: shopping-cart-db
     ports:
       - "27017:27017"
   backend:
-    container_name: shopping-cart-backend
     build:
-      context: ./backend/build/docker
+      context: ./infrastructure/build/docker
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
     environment:
       - PORT=8080
       - TZ=Europe/Berlin
-#      - SPRING_PROFILES_ACTIVE=cloud,testdata
+      - SPRING_PROFILES_ACTIVE=testdata
       - MONGODB_HOST=database
       - MONGODB_DB=shopping-cart
     depends_on:

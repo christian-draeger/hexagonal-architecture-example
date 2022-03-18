@@ -1,4 +1,4 @@
-package codes.draeger.adapter
+package codes.draeger.service
 
 import aValidCart
 import aValidCartItem
@@ -16,10 +16,10 @@ import strikt.assertions.isEqualTo
 import strikt.assertions.isNull
 import java.util.UUID
 
-internal class DomainShoppingCartServiceTest {
+internal class ShoppingCartServicePortTest {
 
     private val shoppingCartRepository: ShoppingCartRepository = mockk()
-    private val domainShoppingCartService = DomainShoppingCartService(shoppingCartRepository)
+    private val domainShoppingCartService = ShoppingCartServicePort(shoppingCartRepository)
 
     @Test
     fun `can put product into shopping cart`() {
@@ -27,6 +27,7 @@ internal class DomainShoppingCartServiceTest {
         val cartId = UUID.randomUUID()
 
         every { shoppingCartRepository.save(any()) } just Runs
+        every { shoppingCartRepository.delete(any()) } just Runs
         every { shoppingCartRepository.findById(any()) } returns anEmptyCart(id = cartId)
 
         val cart = domainShoppingCartService.putProductIntoShoppingCart(
@@ -40,6 +41,7 @@ internal class DomainShoppingCartServiceTest {
 
     @Test
     fun `can take new shopping cart`() {
+        every { shoppingCartRepository.save(any()) } just Runs
         expectThat(domainShoppingCartService.takeNewShoppingCart())
             .get { items }.isEmpty()
     }
@@ -52,7 +54,7 @@ internal class DomainShoppingCartServiceTest {
         expectThat(cart).isEqualTo(existingCart)
     }
 
-@Test
+    @Test
     fun `will return null if shopping cart can not be found`() {
         every { shoppingCartRepository.findById(any()) } returns null
         val cart = domainShoppingCartService.showShoppingCart(UUID.randomUUID())

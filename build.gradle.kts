@@ -6,9 +6,10 @@ plugins {
     id("io.spring.dependency-management") apply false
     kotlin("jvm")
     kotlin("plugin.spring") apply false
+    id("com.bmuschko.docker-spring-boot-application") apply false
     id("com.adarshr.test-logger")
     id("org.jetbrains.kotlinx.kover")
-    // id("org.springframework.experimental.aot") apply false
+    id("org.unbroken-dome.test-sets")
 }
 
 group = "codes.draeger"
@@ -26,14 +27,7 @@ allprojects {
         slowThreshold = 1000
         showStandardStreams = false
     }
-}
 
-subprojects {
-    apply(plugin = "org.jetbrains.kotlin.jvm")
-    dependencies {
-        testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
-        testImplementation("io.strikt:strikt-core:0.31.0")
-    }
     tasks {
         withType<KotlinCompile> {
             kotlinOptions {
@@ -48,12 +42,40 @@ subprojects {
     }
 }
 
+subprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+    dependencies {
+        testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+        testImplementation("io.strikt:strikt-core:0.31.0")
+    }
+}
+
+testSets {
+    val e2eTest by creating {}
+}
+val e2eTestImplementation: Configuration by configurations.getting
+
 kover {
     coverageEngine.set(kotlinx.kover.api.CoverageEngine.INTELLIJ)
 }
 
+dependencies {
+    e2eTestImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+    e2eTestImplementation("io.rest-assured:kotlin-extensions:4.4.0")
+    e2eTestImplementation("org.testcontainers:junit-jupiter:1.16.2")
+}
+
 tasks {
+    build {
+        dependsOn(":infrastructure:dockerCreateDockerfile")
+    }
+
     test {
         finalizedBy(koverReport, koverCollectReports)
+    }
+
+    val e2eTest by getting {
+        shouldRunAfter(test)
+        dependsOn(":infrastructure:dockerCreateDockerfile")
     }
 }

@@ -1,10 +1,10 @@
-package codes.draeger.productservice
+package codes.draeger.service
 
 import codes.draeger.model.Product
 import codes.draeger.model.SKU
 import org.springframework.stereotype.Service
 
 @Service
-interface ProductRepositoryPort {
+interface ProductServicePort {
     fun findProductBySku(sku: SKU): Product?
 }

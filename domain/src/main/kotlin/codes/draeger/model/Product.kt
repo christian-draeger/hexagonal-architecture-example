@@ -56,7 +56,7 @@ data class Price(
 fun Number.toPrice() = Price(toLong())
 
 @JvmInline
-value class Name(val name: String) {
-    override fun toString(): String = name
+value class Name(val value: String) {
+    override fun toString(): String = value
 }
 fun String.toName() = Name(this)

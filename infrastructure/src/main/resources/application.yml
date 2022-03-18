@@ -1,9 +1,47 @@
 server:
   port: ${PORT:8080}
-
+  # k8s optimization --> try to graceful shutdown on pod restart
+  shutdown: graceful
 spring:
+  application:
+    name: "Hexagonal Architecture Example"
+  output:
+    ansi:
+      enabled: detect
   data:
     mongodb:
       host: ${MONGODB_HOST:localhost}
       port: ${MONGODB_PORT:27017}
       database: ${MONGODB_DB:shopping-cart}
+      auto-index-creation: true
+
+
+logging:
+  pattern:
+    console: "%highlight(%.-1level) %date{HH:mm:ss.SSS} [%30.30logger] %msg%n"
+  level:
+    root: INFO
+    org.springframework.web: WARN
+    org.springframework.test: WARN
+    com.mhp.dv.dashboard: INFO
+
+### actuator configurations
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    # always enable liveness and readiness probes for k8s
+    health:
+      probes:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+          - health
+          - prometheus
+          - metrics
+

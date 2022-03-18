@@ -7,4 +7,6 @@ interface ShoppingCartRepository {
     fun findById(id: UUID): Cart?
 
     fun save(cart: Cart)
+
+    fun delete(id: UUID)
 }

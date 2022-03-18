@@ -57,8 +57,8 @@ data class CartItem(
     val price = Price(product.price.inCents * quantity)
 
     init {
-        validateMaxAmount()
-        validateNoneNegativeAmount()
+        validateMaxAmount() // todo check on amount if is in range 1..10, to simplify validation here
+        validateNoneNegativeAmount() // not needed after range check anymore
     }
 
     fun increaseQuantity(increment: Int) = copy(quantity = quantity + increment)
