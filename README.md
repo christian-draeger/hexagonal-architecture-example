@@ -11,6 +11,12 @@
 * add documentation about architectural decisions / project layout
 * clean up
 
+## project layout
+* **domain**: can not see any other module, has no external dependencies and houses the business models and logic. Pure kotlin code
+* **application**: can not see infrastructure module. defines the application ports. Ports can be composed / use each other. It is Describing the use cases of the service
+* **infrastructure**: everything tech related like spring boot setup, persistence implementation, metrics, open api doc generation etc etc
+* **#/src/test**: including e2e test that spin up the application as well as the database via docker compose during test runtime and is doing Blackbox tests
+
 ## development
 
 ### how to run
