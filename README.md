@@ -6,6 +6,9 @@
 
 ### open TODOs:
 * implement product service and use it to add product data to cart items
+* add detekt and ktlint for static code analysis
+* add circuit breaker (resilience4j)
+* add documentation about architectural decisions / project layout
 * clean up
 
 ## development
